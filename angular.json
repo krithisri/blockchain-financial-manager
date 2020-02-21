@@ -120,6 +120,10 @@
               "devServerTarget": "blockchain-finance:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "@angular/fire:deploy",
+          "options": {}
         }
       }
     }

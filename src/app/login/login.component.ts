@@ -12,6 +12,8 @@ export class LoginComponent implements OnInit {
     email: '',
     password: ''
   };
+  errorStatus = false;
+  error = '';
   constructor(private authService: AuthServiceService, private router: Router) { }
 
   ngOnInit() {
@@ -23,7 +25,8 @@ export class LoginComponent implements OnInit {
       this.router.navigate(['/dashboard']);
     }).catch((err) => {
       console.log('error: ' + err);
-      alert('EMail and Password not match');
+      this.errorStatus = true;
+      this.error = err.message;
     });
   }
 
