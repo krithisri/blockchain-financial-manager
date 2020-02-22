@@ -42,7 +42,7 @@ export class TransactionsAllComponent implements OnInit {
           const timestamp = transaction.data().timestamp;
           const transactionID = transaction.data().transactionID;
           const transactionObject = {
-            from, to, amount
+            from, to, amount, transactionID
           };
           const transactionObjectWithTS = {
             from, to, amount, timestamp, currentHash, previousHash, transactionID

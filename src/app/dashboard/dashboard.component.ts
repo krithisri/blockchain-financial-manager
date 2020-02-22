@@ -71,11 +71,11 @@ export class DashboardComponent implements OnInit {
   }
 
   getAlltransactions() {
+    this.blockChainStatus = 'Calculating Hashes and evaluating';
     this.firestore.collection('transactions', ref => ref.orderBy('timestamp', 'desc')).get().subscribe((data) => {
       if (data.empty) {
         this.currentBalance = 0;
       } else {
-        this.blockChainStatus = 'Calculating Hashes and evaluating';
         data.forEach((transaction) => {
           const currentHash = transaction.data().currentHash;
           const previousHash = transaction.data().previousHash;
@@ -83,8 +83,9 @@ export class DashboardComponent implements OnInit {
           const to = transaction.data().to;
           const amount = transaction.data().amount;
           const timestamp = transaction.data().timestamp;
+          const transactionID = transaction.data().transactionID;
           const transactionObject = {
-            from, to, amount
+            from, to, amount, transactionID
           };
           const transactionObjectWithTS = {
             from, to, amount, timestamp

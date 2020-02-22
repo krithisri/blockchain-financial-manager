@@ -41,29 +41,30 @@ export class AddTransactionService {
   createTransaction(transactionDetails) {
     let previousHash;
     let currentHash: string;
+    const transactionID = uniqid();
+    transactionDetails.transactionID = transactionID;
     currentHash = hash(transactionDetails);
     console.log(transactionDetails, currentHash);
     this.checkDocExists().then((val) => {
       console.log(val);
       if (val) {
         previousHash = null;
-        this.addBlock(transactionDetails, previousHash, currentHash);
+        this.addBlock(transactionDetails, previousHash, currentHash, transactionID);
       } else {
         this.getLatestHash().then((data) => {
           previousHash = data;
-          this.addBlock(transactionDetails, previousHash, currentHash);
+          this.addBlock(transactionDetails, previousHash, currentHash, transactionID);
         });
       }
     });
   }
 
-  addBlock(details, prev, curr) {
+  addBlock(details, prev, curr, transactionID) {
     const from = details.from;
     const to = details.to;
     const amount = details.amount;
     const previousHash = prev;
     const currentHash = curr;
-    const transactionID = uniqid();
     this.firestore.collection('transactions').doc(transactionID).set({
       from, to, amount, previousHash, currentHash, transactionID,
       timestamp: firebase.firestore.FieldValue.serverTimestamp()
