@@ -107,9 +107,13 @@ export class DashboardComponent implements OnInit {
               }
             } else {
               alert('Blockchain Tampered');
+              this.blockChainStatus = `Transaction with hash: ` + currentHash + `
+              has been tampered. Check failed at validating transactional details`;
             }
           } else {
             alert('Blockchain Tampered');
+            this.blockChainStatus = this.blockChainStatus = `Transaction with hash: ` + currentHash + `
+            has been tampered. Check failed at validating Overall transaction hash check`;
           }
         });
       }

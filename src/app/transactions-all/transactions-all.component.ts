@@ -40,11 +40,12 @@ export class TransactionsAllComponent implements OnInit {
           const to = transaction.data().to;
           const amount = transaction.data().amount;
           const timestamp = transaction.data().timestamp;
+          const transactionID = transaction.data().transactionID;
           const transactionObject = {
             from, to, amount
           };
           const transactionObjectWithTS = {
-            from, to, amount, timestamp, currentHash, previousHash
+            from, to, amount, timestamp, currentHash, previousHash, transactionID
           };
           const calculatedHash = hash(transactionObject);
           this.prevHashCheck.push(previousHash);
